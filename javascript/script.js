@@ -68,8 +68,13 @@ function iniciarJogo() {
     if(direction == "down") snakeY += box;
     if(direction == "up") snakeY -= box;
 
-    //responsavel pelo movimento
-    snake.pop(); //retira o último elemento do array snake
+    //Crescimento da cobra
+    if(snakeX != food.x || snakeY != food.y) {
+        snake.pop();
+    } else {
+        food.x = Math.floor(Math.random() * 15 + 1) * box;
+        food.y = Math.floor(Math.random() * 15 + 1) * box;
+    }
 
     let newHead = {
         x: snakeX,
