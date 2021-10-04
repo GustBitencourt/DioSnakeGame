@@ -9,7 +9,12 @@ snake[0] = {
     y: 8 * box,
 }
 
-let direction = "right"; 
+let direction = "right"; //direção de inicio
+
+let food = { //gerando a comida randomicamente
+    x: Math.floor(Math.random() * 15 + 1) * box,
+    y: Math.floor(Math.random() * 15 + 1) * box
+}
 
 //função que cria o background
 function criarBG() {
@@ -24,6 +29,13 @@ function criarSnake() {
         context.fillRect(snake[i].x, snake[i].y, box, box); //criando cobra
     }
 }
+
+function foodMaker() {
+    context.fillStyle = "blue";
+    context.fillRect(food.x, food.y, box, box);
+}
+
+
 
 document.addEventListener('keydown', update); //evento que pega a tecla
 
@@ -44,6 +56,7 @@ function iniciarJogo() {
 
     criarBG();
     criarSnake();
+    foodMaker();
 
     //posição de partida da cobra
     let snakeX = snake[0].x;
@@ -52,8 +65,8 @@ function iniciarJogo() {
     //movimento da cobra
     if(direction == "right") snakeX += box; 
     if(direction == "left") snakeX -= box;
-    if(direction == "up") snakeY -= box;
     if(direction == "down") snakeY += box;
+    if(direction == "up") snakeY -= box;
 
     //responsavel pelo movimento
     snake.pop(); //retira o último elemento do array snake
